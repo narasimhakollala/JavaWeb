@@ -1,9 +1,14 @@
 pipeline {
-    agent any
+    agent {
+        node {
+            label 'build'
+            customWorkspace '/home/centos/JavaWeb'
+        }
+    }
     stages {
         stage('SCM') {
             steps {
-                git 'https://github.com/narasimhakollala/JavaWeb.git'
+				git 'https://github.com/narasimhakollala/JavaWeb.git'
             }
         }
         stage('Build') {
@@ -15,7 +20,7 @@ pipeline {
         }
 		stage('Unit Test') {
             steps {
-		sh 'mvn test'
+					sh 'mvn test'
             }
         }
     }
