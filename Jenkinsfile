@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        node {
-            label 'any'
-            customWorkspace '/home/centos/'
-        }
-    }
+    agent any
     stages {
         stage('SCM') {
             steps {
@@ -13,14 +8,14 @@ pipeline {
         }
         stage('Build') {
             steps {
-                dir('JavaWeb') {
+                dir('/home/centos/JavaWeb') {
                     sh 'mvn clean package'
                 }
             }
         }
 		stage('Unit Test') {
             steps {
-					sh 'mvn test'
+		sh 'mvn test'
             }
         }
     }
